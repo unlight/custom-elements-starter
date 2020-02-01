@@ -8,6 +8,8 @@
     "noImplicitAny": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "outDir": "dist",
     "pretty": true,
     "removeComments": false,
@@ -15,12 +17,7 @@
     "declaration": false,
     "declarationMap": false,
     "skipLibCheck": true,
-    "lib": [
-      "esnext",
-      "dom"
-    ]
+    "lib": ["esnext", "dom"]
   },
-  "include": [
-    "src/**/*.ts"
-  ]
+  "exclude": ["node_modules"]
 }

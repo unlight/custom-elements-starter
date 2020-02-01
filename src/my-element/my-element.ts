@@ -2,7 +2,11 @@
  * Import LitElement base class, html helper function,
  * and TypeScript decorators
  **/
-import { LitElement, html, customElement, property, TemplateResult } from 'lit-element';
+import { LitElement, html, customElement, property, TemplateResult, css } from 'lit-element';
+// @ts-ignore
+import { template } from './my-element.html';
+
+// import style from './scss/toggle-switch.scss';
 
 /**
  * Use the customElement decorator to define your class as
@@ -10,6 +14,7 @@ import { LitElement, html, customElement, property, TemplateResult } from 'lit-e
  */
 @customElement('my-element')
 export class MyElement extends LitElement {
+    // public static styles = style({ css });
     /**
      * Create an observed property. Triggers update on change.
      */
@@ -20,12 +25,9 @@ export class MyElement extends LitElement {
      * Implement `render` to define a template for your element.
      */
     render(): TemplateResult {
-        /**
-         * Use JavaScript expressions to include property values in
-         * the element template.
-         */
-        return html`
-            <p>${this.foo}</p>
-        `;
+        return template({
+            html,
+            values: { self: this },
+        });
     }
 }

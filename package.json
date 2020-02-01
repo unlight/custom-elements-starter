@@ -9,9 +9,9 @@
     "rollup"
   ],
   "scripts": {
-    "_buildx": "node node_modules/webpack/bin/webpack --mode development --no-devtool",
     "cleanup": "rm -rf dist && mkdir dist",
     "build": "rollup --config",
+    "_buildx": "node node_modules/webpack/bin/webpack --mode development --no-devtool",
     "_dev": "npm run cleanup && rollup --config --watch",
     "__dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
     "_lint": "eslint --cache --ext .js,.jsx,.ts,.tsx  ./src",
@@ -61,6 +61,7 @@
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@rollup/plugin-commonjs": "^11.0.2",
+    "@rollup/plugin-html": "^0.1.1",
     "@rollup/plugin-node-resolve": "^7.1.0",
     "@rollup/plugin-typescript": "^3.0.0",
     "@semantic-release/changelog": "^5.0.0",
@@ -90,6 +91,7 @@
     "precise-commits": "^1.0.2",
     "prettier": "^1.19.1",
     "rollup": "^1.31.0",
+    "rollup-plugin-lit-html": "^2.0.1",
     "semantic-release": "^17.0.2",
     "simplytyped": "^3.2.3",
     "ts-jest": "^25.1.0",

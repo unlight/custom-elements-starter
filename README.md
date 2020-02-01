@@ -1,13 +1,14 @@
-# node-package-starter
+# lit-element-starter
 
-## Install
-```
-git clone https://github.com/unlight/node-package-starter
-```
-If necessary:
-```
-npm run setupfrontend
-npm run setupwebpack
-npm run setupmutation
-npm run setupkarma
-```
+## Stack
+
+-   lit-element
+
+## Resources
+
+-   https://github.com/ilteoood/webcomponent-sample-toggle
+-   [Web Components: a future-proof structure](https://medium.com/gft-engineering/web-components-a-future-proof-structure-5db3865fa31)
+
+## Todo
+
+-   https://www.npmjs.com/package/rollup-plugin-lit-html

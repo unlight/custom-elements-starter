@@ -3,6 +3,8 @@ import resolve from '@rollup/plugin-node-resolve';
 // import serve from 'rollup-plugin-serve';
 // import { terser } from 'rollup-plugin-terser';
 import typescript from '@rollup/plugin-typescript';
+import litHtml from 'rollup-plugin-lit-html';
+import html from '@rollup/plugin-html';
 
 const production = !process.env.ROLLUP_WATCH;
 const nodeplugins = [
@@ -33,8 +35,12 @@ export default [
         output: output,
         plugins: [
             ...nodeplugins,
+            litHtml(),
             typescript({
                 module: 'es2015',
+            }),
+            html({
+                title: 'lit-element-starter',
             }),
             // copy({
             //     targets: [
