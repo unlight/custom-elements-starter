@@ -8,3 +8,8 @@ declare module '*.scss' {
     const scss: (params: { css: typeof css }) => CSSResult;
     export default scss;
 }
+
+declare module '*.css' {
+    const style: any;
+    export default style;
+}

@@ -3,10 +3,6 @@
  * and TypeScript decorators
  **/
 import { LitElement, html, customElement, property, TemplateResult, css } from 'lit-element';
-// @ts-ignore
-import { template } from './my-element.html';
-
-// import style from './scss/toggle-switch.scss';
 
 /**
  * Use the customElement decorator to define your class as
@@ -14,7 +10,12 @@ import { template } from './my-element.html';
  */
 @customElement('my-element')
 export class MyElement extends LitElement {
-    // public static styles = style({ css });
+    static styles = css`
+        :host {
+            font-weight: bold;
+        }
+    `;
+
     /**
      * Create an observed property. Triggers update on change.
      */
@@ -24,10 +25,9 @@ export class MyElement extends LitElement {
     /**
      * Implement `render` to define a template for your element.
      */
-    render(): TemplateResult {
-        return template({
-            html,
-            values: { self: this },
-        });
+    render() {
+        return html`
+            <p>${this.foo}</p>
+        `;
     }
 }

@@ -11,4 +11,7 @@
 
 ## Todo
 
+-   https://github.com/trygve-lie/rollup-plugin-esm-import-to-url can solve issue with replace
+-   move lit-element-rollup-plugin to app_modules
 -   https://www.npmjs.com/package/rollup-plugin-lit-html
+-   https://github.com/pmowrer/rollup-plugin-peer-deps-external
