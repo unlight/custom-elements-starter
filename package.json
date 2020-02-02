@@ -87,6 +87,7 @@
     "precise-commits": "^1.0.2",
     "prettier": "^1.19.1",
     "rollup": "^1.31.0",
+    "rollup-plugin-lit-styles": "0.0.6",
     "rollup-plugin-livereload": "^1.0.4",
     "rollup-plugin-serve": "^1.0.1",
     "rollup-plugin-terser": "^5.2.0",

@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import typescript from '@rollup/plugin-typescript';
 import html from '@rollup/plugin-html';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
+import litStyles from 'rollup-plugin-lit-styles';
 
 const env = {
     watch: Boolean(process.env.ROLLUP_WATCH),
@@ -34,6 +35,9 @@ export default [
         output: output,
         plugins: [
             ...nodeplugins,
+            litStyles({
+                postCssPlugins: [],
+            }),
             typescript({
                 module: 'es2015',
             }),

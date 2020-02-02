@@ -3,6 +3,8 @@
  * and TypeScript decorators
  **/
 import { LitElement, html, customElement, property, TemplateResult, css } from 'lit-element';
+// @ts-ignore
+import style from './my.element.css';
 
 /**
  * Use the customElement decorator to define your class as
@@ -10,11 +12,7 @@ import { LitElement, html, customElement, property, TemplateResult, css } from '
  */
 @customElement('my-element')
 export class MyElement extends LitElement {
-    static styles = css`
-        :host {
-            font-weight: bold;
-        }
-    `;
+    static styles = [style];
 
     /**
      * Create an observed property. Triggers update on change.
