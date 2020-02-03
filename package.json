@@ -11,7 +11,7 @@
   "scripts": {
     "cleanup": "rm -rf dist && mkdir dist",
     "build": "node node_modules/rollup/dist/bin/rollup --config",
-    "build:prod": "npm run build -- --environment MINIFY",
+    "build:prod": "npm run build -- --environment MINIFY,PRODUCTION",
     "dev": "npm run build -- --watch",
     "serve": "npm run dev",
     "_lint": "eslint --cache --ext .js,.jsx,.ts,.tsx  ./src",
@@ -70,7 +70,7 @@
     "cz-customizable": "^6.2.0",
     "eslint": "^6.8.0",
     "eslint-import-resolver-node": "^0.3.3",
-    "eslint-plugin-import": "^2.20.0",
+    "eslint-plugin-import": "^2.20.1",
     "eslint-plugin-jest": "^23.6.0",
     "eslint-plugin-only-warn": "^1.0.2",
     "eslint-plugin-prettier": "^3.1.2",

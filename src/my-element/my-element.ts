@@ -4,7 +4,7 @@
  **/
 import { LitElement, html, customElement, property, TemplateResult, css } from 'lit-element';
 // @ts-ignore
-import style from './my.element.css';
+import style from './my-element.css';
 
 /**
  * Use the customElement decorator to define your class as

@@ -1,16 +1,18 @@
-import commonjs from '@rollup/plugin-commonjs';
-import resolve from '@rollup/plugin-node-resolve';
-import serve from 'rollup-plugin-serve';
-import livereload from 'rollup-plugin-livereload';
-import { terser } from 'rollup-plugin-terser';
-import typescript from '@rollup/plugin-typescript';
-import html from '@rollup/plugin-html';
-import { typescriptPaths } from 'rollup-plugin-typescript-paths';
-import litStyles from 'rollup-plugin-lit-styles';
+const commonjs = require('@rollup/plugin-commonjs');
+const resolve = require('@rollup/plugin-node-resolve');
+const serve = require('rollup-plugin-serve');
+const livereload = require('rollup-plugin-livereload');
+const { terser } = require('rollup-plugin-terser');
+const typescript = require('@rollup/plugin-typescript');
+const html = require('@rollup/plugin-html');
+const { typescriptPaths } = require('rollup-plugin-typescript-paths');
+const litStyles = require('rollup-plugin-lit-styles');
+const globImport = require('rollup-plugin-glob-import');
 
 const env = {
     watch: Boolean(process.env.ROLLUP_WATCH),
     minify: Boolean(process.env.MINIFY),
+    production: Boolean(process.env.PRODUCTION),
 };
 const nodeplugins = [
     commonjs({ include: /node_modules/ }),
@@ -22,15 +24,21 @@ const output = {
     sourcemap: false,
 };
 
-export default [
+exports.default = [
     {
         input: 'lit-element',
         output: output,
         plugins: [...nodeplugins, env.minify && terser()],
     },
-    {
+    rollupConfig(),
+];
+
+exports.rollupConfig = rollupConfig;
+
+function rollupConfig(options) {
+    return {
         input: 'src/index.ts',
-        // treeshake: production,
+        treeshake: env.production,
         external: ['tslib', 'lit-element'],
         output: output,
         plugins: [
@@ -59,12 +67,12 @@ export default [
                 //     code = code.replace('tslib', '/node_modules/tslib/tslib.es6.js');
                 //     return { code };
                 // },
-                generateBundle(options, bundle, isWrite) {
-                    let code = bundle['index.js'].code;
-                    code = code.replace('lit-element', '/lit-element.js');
-                    code = code.replace('tslib', '/node_modules/tslib/tslib.es6.js');
-                    bundle['index.js'].code = code;
-                },
+                // generateBundle(options, bundle, isWrite) {
+                //     let code = bundle['index.js'].code;
+                //     code = code.replace('lit-element', '/lit-element.js');
+                //     code = code.replace('tslib', '/node_modules/tslib/tslib.es6.js');
+                //     bundle['index.js'].code = code;
+                // },
                 // outputOptions(b) {
                 //     console.log('b', b);
                 // },
@@ -72,6 +80,7 @@ export default [
             html({
                 title: 'lit-element-starter',
             }),
+            globImport({ include: '**/spec.module.js' }),
             env.watch &&
                 serve({
                     contentBase: ['dist', '.'],
@@ -94,5 +103,6 @@ export default [
             //     },
             // },
         ],
-    },
-];
+        ...(options || {}),
+    };
+}
