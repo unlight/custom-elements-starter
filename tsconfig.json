@@ -13,11 +13,12 @@
     "outDir": "dist",
     "pretty": true,
     "removeComments": false,
-    "sourceMap": false,
+    "sourceMap": true,
     "declaration": false,
     "declarationMap": false,
     "skipLibCheck": true,
     "lib": ["esnext", "dom"]
   },
+  "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]
 }

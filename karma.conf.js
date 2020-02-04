@@ -2,7 +2,7 @@ const { rollupConfig } = require('./rollup.config');
 
 module.exports = config => {
     config.set({
-        files: [],
+        files: [{ pattern: 'dist/bundle.spec.js', type: 'module' }],
         browsers: ['ChromeHeadlessNoSandbox'],
         customLaunchers: {
             ChromeHeadlessNoSandbox: {
@@ -10,36 +10,13 @@ module.exports = config => {
                 flags: ['--no-sandbox', '--disable-setuid-sandbox'],
             },
         },
-        plugins: [
-            require('karma-jasmine'),
-            require('karma-chrome-launcher'),
-            require('karma-coverage-istanbul-reporter'),
-            require('@open-wc/karma-esm'),
-            require('karma-source-map-support'),
-            require('karma-mocha-reporter'),
-            'karma-*',
-        ],
+        plugins: [require('@open-wc/karma-esm'), 'karma-*'],
         frameworks: ['esm', 'jasmine', 'source-map-support'],
+        // mime: {
+        //     'text/x-typescript': ['ts', 'tsx'],
+        // },
         esm: {
-            // coverage,
-            // compatibility,
-            // // prevent compiling es5 libs
-            // babelExclude: [
-            //     '**/node_modules/mocha/**/*',
-            //     '**/node_modules/chai/**/*',
-            //     '**/node_modules/sinon-chai/**/*',
-            //     '**/node_modules/chai-dom/**/*',
-            //     '**/node_modules/core-js-bundle/**/*',
-            // ],
-            // sinon is not completely es5...
-            // babelModernExclude: ['**/node_modules/sinon/**/*'],
-            // prevent compiling non-module libs
-            // babelModuleExclude: ['**/node_modules/mocha/**/*', '**/node_modules/core-js-bundle/**/*'],
-            // polyfills: {
-            //     webcomponents: true,
-            //     fetch: true,
-            // },
-            // exclude: ['**/__snapshots__/**/*'],
+            nodeResolve: true,
         },
         // preprocessors: {
         //     '**/__snapshots__/**/*.md': ['snapshot'],
@@ -54,6 +31,7 @@ module.exports = config => {
             captureConsole: true,
             clearContext: false, // leave Jasmine Spec Runner output visible in browser
         },
+
         colors: true,
         // possible values: LOG_DISABLE || LOG_ERROR || LOG_WARN || LOG_INFO || LOG_DEBUG
         logLevel: config.LOG_INFO,
@@ -73,12 +51,11 @@ module.exports = config => {
         //         return `${basePath}/__snapshots__/${suiteName}.md`;
         //     },
         // },
-        autoWatch: false,
+        autoWatch: true,
         singleRun: false,
-        concurrency: Infinity,
     });
 
-    if (process.argv.includes('--code-coverage') || process.argv.includes('--coverage')) {
+    if (process.argv.includes('--code-coverage') || process.argv.includes('--collectCoverage')) {
         config.set({
             reporters: ['mocha', 'coverage-istanbul'],
             esm: {
