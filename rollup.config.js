@@ -8,49 +8,34 @@ const html = require('@rollup/plugin-html');
 const { typescriptPaths } = require('rollup-plugin-typescript-paths');
 const litStyles = require('rollup-plugin-lit-styles');
 const multi = require('@rollup/plugin-multi-entry');
+const esmImportToUrl = require('rollup-plugin-esm-import-to-url');
 
 const env = {
     watch: Boolean(process.env.ROLLUP_WATCH),
     minify: Boolean(process.env.MINIFY),
     production: Boolean(process.env.PRODUCTION),
     test: Boolean(process.env.TEST),
+    libs: Boolean(process.env.LIBS),
 };
+
 const nodePlugins = [
     commonjs({ include: /node_modules/ }),
     resolve({ extensions: ['.mjs', '.js', '.json', '.node', '.ts', '.tsx'] }),
 ];
+
 const output = {
     dir: 'dist',
     format: 'esm',
     sourcemap: false,
 };
 
-exports.default = [
-    {
-        input: 'lit-element',
-        output: output,
-        plugins: [...nodePlugins, env.minify && terser()],
-    },
-    rollupConfig(env),
-];
-
-exports.rollupConfig = rollupConfig;
+module.exports = rollupConfig(env);
 
 function rollupConfig(env) {
-    const customPlugins = [];
-    const customOptions = {};
+    const options = {};
 
-    if (env.test) {
-        customOptions.input = 'src/**/*.spec.ts';
-        customPlugins.push(multi());
-        customOptions.output = {
-            ...output,
-            file: 'dist/bundle.spec.js',
-            dir: undefined,
-            sourcemap: 'inline',
-        };
-    }
-
+    const input = 'src/index.ts';
+    const external = [];
     const plugins = [
         ...nodePlugins,
         litStyles({
@@ -67,26 +52,6 @@ function rollupConfig(env) {
                 // options.external
                 return options;
             },
-            // resolveId(source) {
-            //     console.log('source', source);
-            // },
-            // load(id) {
-            //     console.log('id1', id);
-            // },
-            // transform(code, id) {
-            //     code = code.replace('lit-element', '/lit-element.js');
-            //     code = code.replace('tslib', '/node_modules/tslib/tslib.es6.js');
-            //     return { code };
-            // },
-            // generateBundle(options, bundle, isWrite) {
-            //     let code = bundle['index.js'].code;
-            //     code = code.replace('lit-element', '/lit-element.js');
-            //     code = code.replace('tslib', '/node_modules/tslib/tslib.es6.js');
-            //     bundle['index.js'].code = code;
-            // },
-            // outputOptions(b) {
-            //     console.log('b', b);
-            // },
         },
         !env.test &&
             html({
@@ -107,22 +72,39 @@ function rollupConfig(env) {
                     comments: false,
                 },
             }),
-        // {
-        //     name: 'debugger',
-        //     transform(code, id) {
-        //         debugger;
-        //         console.log('code', code);
-        //     },
-        // },
-        ...customPlugins,
     ];
 
+    if (env.libs) {
+        options.input = 'lit-element';
+        options.external = [];
+    } else {
+        plugins.unshift(
+            esmImportToUrl({
+                imports: {
+                    tslib: 'http://localhost:8044/node_modules/tslib/tslib.es6.js',
+                    'lit-element': 'http://localhost:8044/lit-element.js',
+                },
+            }),
+        );
+    }
+
+    if (env.test) {
+        options.input = 'src/**/*.spec.ts';
+        customPlugins.unshift(multi());
+        options.output = {
+            ...output,
+            file: 'dist/bundle.spec.js',
+            dir: undefined,
+            sourcemap: 'inline',
+        };
+    }
+
     return {
-        input: 'src/index.ts',
+        input: input,
         treeshake: env.production,
-        external: ['tslib', 'lit-element'],
+        external: external,
         output: output,
         plugins: plugins,
-        ...customOptions,
+        ...options,
     };
 }

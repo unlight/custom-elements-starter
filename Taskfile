@@ -2,6 +2,12 @@
 PATH="$PWD/node_modules/.bin":$PATH
 set -e
 
+predev() {
+    if [ ! -f "dist/lit-element.js" ]; then
+        npm run build:libs
+    fi
+}
+
 build() {
     set -x
     rm -rfv dist
