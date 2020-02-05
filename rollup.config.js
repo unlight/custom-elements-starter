@@ -77,7 +77,7 @@ function rollupConfig(env) {
     if (env.libs) {
         options.input = 'lit-element';
         options.external = [];
-    } else {
+    } else if (!env.test) {
         plugins.unshift(
             esmImportToUrl({
                 imports: {
@@ -90,7 +90,7 @@ function rollupConfig(env) {
 
     if (env.test) {
         options.input = 'src/**/*.spec.ts';
-        customPlugins.unshift(multi());
+        plugins.unshift(multi());
         options.output = {
             ...output,
             file: 'dist/bundle.spec.js',
