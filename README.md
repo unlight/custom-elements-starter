@@ -2,7 +2,13 @@
 
 ## Stack
 
+-   TypeScript
 -   lit-element
+-   Rollup
+-   ESLint
+-   Karma
+-   Jasmine
+-   Prettier
 
 ## Resources
 
@@ -12,8 +18,9 @@
 
 ## Todo
 
--   https://github.com/drochgenius/lit-element-tester
--   https://github.com/trygve-lie/rollup-plugin-esm-import-to-url can solve issue with replace
+-   storybook
+-   import from index.html
+-   postcss
 -   move lit-element-rollup-plugin to app_modules
 -   https://www.npmjs.com/package/rollup-plugin-lit-html
--   https://github.com/pmowrer/rollup-plugin-peer-deps-external
+-   mutation
