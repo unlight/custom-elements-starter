@@ -2,7 +2,7 @@ const { rollupConfig } = require('./rollup.config');
 
 module.exports = config => {
     config.set({
-        files: [{ pattern: 'dist/bundle.spec.js', type: 'module' }],
+        files: [{ pattern: 'src/**/*.spec.ts', type: 'module' }],
         browsers: ['ChromeHeadlessNoSandbox'],
         customLaunchers: {
             ChromeHeadlessNoSandbox: {
@@ -14,6 +14,8 @@ module.exports = config => {
         frameworks: ['esm', 'jasmine', 'source-map-support'],
         esm: {
             nodeResolve: true,
+            babel: true,
+            fileExtensions: ['.ts', '.tsx'],
         },
         reporters: ['progress'],
         restartOnFileChange: true,
@@ -36,6 +38,13 @@ module.exports = config => {
         },
         autoWatch: true,
         singleRun: false,
+        mime: {
+            'text/x-typescript': ['ts', 'tsx'],
+        },
+        preprocessors: {
+            '**/*.spec.js': ['rollup'],
+        },
+        rollupPreprocessor: rollupConfig({ test: true }),
     });
 
     if (process.argv.includes('--code-coverage') || process.argv.includes('--collectCoverage')) {
