@@ -18,7 +18,7 @@ export class MyElement extends LitElement {
      * Create an observed property. Triggers update on change.
      */
     @property()
-    foo = 'foo bar test';
+    foo = 'foo bar';
 
     /**
      * Implement `render` to define a template for your element.

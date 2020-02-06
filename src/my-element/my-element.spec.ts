@@ -5,4 +5,9 @@ describe('my-element', () => {
         const element = new MyElement();
         expect(element).toBeTruthy();
     });
+
+    it('prop', () => {
+        const element = new MyElement();
+        expect(element.foo).toBe('foo bar');
+    });
 });
