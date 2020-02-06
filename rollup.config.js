@@ -29,7 +29,9 @@ const output = {
     sourcemap: false,
 };
 
-module.exports = rollupConfig(env);
+module.exports.default = rollupConfig(env);
+
+module.exports.rollupConfig = rollupConfig;
 
 function rollupConfig(env) {
     const options = {};
