@@ -19,6 +19,8 @@
 ## Todo
 
 -   storybook
+-   https://github.com/runem/web-component-analyzer
+-   https://github.com/runem/lit-analyzer
 -   import from index.html
 -   postcss
 -   move lit-element-rollup-plugin to app_modules
