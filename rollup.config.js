@@ -9,6 +9,7 @@ const { typescriptPaths } = require('rollup-plugin-typescript-paths');
 const litStyles = require('rollup-plugin-lit-styles');
 const multi = require('@rollup/plugin-multi-entry');
 const esmImportToUrl = require('rollup-plugin-esm-import-to-url');
+const babel = require('rollup-plugin-babel');
 
 const env = {
     watch: Boolean(process.env.ROLLUP_WATCH),
@@ -18,10 +19,9 @@ const env = {
     libs: Boolean(process.env.LIBS),
 };
 
-const nodePlugins = [
-    commonjs({ include: /node_modules/ }),
-    resolve({ extensions: ['.mjs', '.js', '.json', '.node', '.ts', '.tsx'] }),
-];
+const extensions = ['.js', '.jsx', '.ts', '.tsx', '.mjs'];
+
+const nodePlugins = [resolve({ extensions: extensions }), commonjs({ include: /node_modules/ })];
 
 const output = {
     dir: 'dist',
@@ -41,18 +41,10 @@ function rollupConfig(env) {
         litStyles({
             postCssPlugins: [],
         }),
-        typescript({
-            module: 'es2015',
-            noEmitOnError: false,
+        babel({
+            extensions: extensions,
+            exclude: /node_modules/,
         }),
-        typescriptPaths({ absolute: false }),
-        {
-            name: 'lit-element-rollup-plugin',
-            options: options => {
-                // options.external
-                return options;
-            },
-        },
         !env.test &&
             html({
                 title: 'lit-element-starter',
