@@ -3,9 +3,8 @@
  * and TypeScript decorators
  **/
 import { customElement, html, LitElement, property } from 'lit-element';
-
 // @ts-ignore
-// import style from './my-element.css';
+import style from './my-element.css';
 
 /**
  * Use the customElement decorator to define your class as
