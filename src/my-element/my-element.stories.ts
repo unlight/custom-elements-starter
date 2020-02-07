@@ -3,7 +3,7 @@ import { html } from 'lit-element';
 import './my-element';
 
 export default {
-    title: 'Demo My Element',
+    title: 'My Element',
     component: 'my-element',
 };
 
