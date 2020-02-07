@@ -43,7 +43,9 @@
     "_setupwebpack": "npm i && npm i -D webpack @types/webpack @types/webpack-env webpack-cli webpack-dev-server html-webpack-plugin source-map-loader ts-loader html-loader add-asset-html-webpack-plugin terser-webpack-plugin istanbul-instrumenter-loader swc-loader @swc/core",
     "_setupmutation": "npm i && npm i -D stryker-cli @stryker-mutator/core @stryker-mutator/typescript @stryker-mutator/jest-runner @stryker-mutator/html-reporter",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "storybook:docs": "start-storybook --docs -p 6006",
+    "build:storybook": "build-storybook",
+    "analyze": "wca analyze \"src/**/*.{js,ts}\" --format json --outFile dist/custom-elements.json"
   },
   "husky": {
     "hooks": {
@@ -122,6 +124,7 @@
     "tslint-sonarts": "^1.9.0",
     "type-coverage": "^2.4.0",
     "typescript": "~3.7.5",
-    "watchexec-bin": "^1.0.0"
+    "watchexec-bin": "^1.0.0",
+    "web-component-analyzer": "^1.0.2"
   }
 }
