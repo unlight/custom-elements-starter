@@ -10,6 +10,7 @@ module.exports = {
         'plugin:unicorn/recommended',
         'plugin:promise/recommended',
         'plugin:sonarjs/recommended',
+        'plugin:lit/recommended',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
@@ -29,6 +30,7 @@ module.exports = {
         'simple-import-sort',
         'promise',
         'sonarjs',
+        'lit',
         'only-warn',
     ],
     rules: {

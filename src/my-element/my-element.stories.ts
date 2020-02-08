@@ -1,10 +1,12 @@
-import { html } from 'lit-element';
-
 import './my-element';
+
+import { text, withKnobs } from '@storybook/addon-knobs';
+import { html } from 'lit-element';
 
 export default {
     title: 'My Element',
     component: 'my-element',
+    decorators: [withKnobs],
 };
 
 export const heading = () =>
@@ -15,7 +17,7 @@ export const heading = () =>
 
 export const myElement = () =>
     html`
-        <my-element></my-element>
+        <my-element .foo="${text('foo', 'Hello')}"></my-element>
     `;
 
 // export const assets = () =>
