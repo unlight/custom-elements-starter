@@ -2,10 +2,9 @@
  * Import LitElement base class, html helper function,
  * and TypeScript decorators
  **/
-import { customElement, html, LitElement, property } from 'lit-element';
-
+import { customElement, html, LitElement, property, unsafeCSS } from 'lit-element';
 // @ts-ignore
-// import style from './my-element.css';
+import style from './my-element.css';
 
 /**
  * Use the customElement decorator to define your class as
@@ -13,7 +12,7 @@ import { customElement, html, LitElement, property } from 'lit-element';
  */
 @customElement('my-element')
 export class MyElement extends LitElement {
-    // static styles = [style];
+    static styles = unsafeCSS(style);
 
     /**
      * Create an observed property. Triggers update on change.

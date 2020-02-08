@@ -12,6 +12,7 @@ module.exports = {
         ],
     ],
     plugins: [
+        'import-postcss',
         ['@babel/plugin-proposal-decorators', { legacy: true }],
         ['@babel/plugin-proposal-class-properties', { loose: true }],
     ],
