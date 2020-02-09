@@ -1,6 +1,5 @@
 const commonjs = require('@rollup/plugin-commonjs');
 const resolve = require('@rollup/plugin-node-resolve');
-const serve = require('rollup-plugin-serve');
 const livereload = require('rollup-plugin-livereload');
 const { terser } = require('rollup-plugin-terser');
 const typescript = require('@rollup/plugin-typescript');
@@ -10,6 +9,7 @@ const litStyles = require('rollup-plugin-lit-styles');
 const multi = require('@rollup/plugin-multi-entry');
 const esmImportToUrl = require('rollup-plugin-esm-import-to-url');
 const babel = require('rollup-plugin-babel');
+const browsersync = require('rollup-plugin-browsersync');
 
 const env = {
     watch: Boolean(process.env.ROLLUP_WATCH),
@@ -51,15 +51,8 @@ function rollupConfig(env) {
             html({
                 title: 'lit-element-starter',
             }),
-        env.watch &&
-            !env.test &&
-            serve({
-                contentBase: ['dist', '.'],
-                historyApiFallback: false,
-                host: 'localhost',
-                port: 8044,
-            }),
-        env.watch && !env.test && livereload(),
+        env.watch && !env.test && browsersync({ server: ['dist', '.'], port: 8044, notify: false }),
+        // env.watch && !env.test && livereload(),
         env.minify &&
             terser({
                 output: {
