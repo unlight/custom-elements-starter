@@ -1,5 +1,5 @@
 module.exports = {
-    stories: ['../src/**/*.stories.{ts,js,mdx}'],
+    stories: ['../src/**/*.stories.{ts,js,mdx}', '../src/**/*.story.{ts,js,mdx}'],
     addons: ['@storybook/addon-docs', '@storybook/addon-knobs/register'],
     webpackFinal: async config => {
         const rule = config.module.rules.find(r => {

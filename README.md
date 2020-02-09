@@ -20,6 +20,7 @@
 
 ## Todo
 
+-   https://github.com/43081j/eslint-plugin-wc
 -   https://github.com/zertosh/eslint-plugin-lint#readme
 -   import from index.html
 -   postcss

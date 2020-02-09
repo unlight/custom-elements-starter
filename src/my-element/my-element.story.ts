@@ -9,12 +9,6 @@ export default {
     decorators: [withKnobs],
 };
 
-export const heading = () =>
-    html`
-        <h1>Hello World</h1>
-        <input type="text" />
-    `;
-
 export const myElement = () =>
     html`
         <my-element .foo="${text('foo', 'Hello')}"></my-element>

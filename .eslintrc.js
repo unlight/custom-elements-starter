@@ -89,7 +89,7 @@ module.exports = {
     },
     overrides: [
         {
-            files: ['*.spec.ts', '**/testing/**/*.ts'],
+            files: ['*.spec.ts', '**/testing/**/*.ts', '*.stories.ts', '*.story.ts'],
             rules: {
                 'consistent-return': 0,
                 'max-lines': 0,
