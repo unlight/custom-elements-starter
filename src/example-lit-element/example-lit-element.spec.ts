@@ -1,6 +1,6 @@
-import { MyElement } from './my-element';
+import { MyElement } from './example-lit-element';
 
-describe('my-element', () => {
+describe('example-lit-element', () => {
     it('smoke', () => {
         const element = new MyElement();
         expect(element).toBeTruthy();

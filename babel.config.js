@@ -12,6 +12,7 @@ module.exports = {
         ],
     ],
     plugins: [
+        ['babel-plugin-postcss', { test: /\.css$/, tagged: ['css', 'lit-element'] }],
         ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }],
         ['@babel/plugin-proposal-class-properties', { loose: true }],
     ],
