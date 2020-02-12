@@ -53,7 +53,17 @@ function rollupConfig(env) {
             }),
         env.watch &&
             !env.test &&
-            browsersync({ server: ['dist', '.'], port: 8044, notify: false, open: false }),
+            browsersync({
+                server: ['dist', '.'],
+                port: 8044,
+                notify: false,
+                open: false,
+                socket: {
+                    clients: {
+                        heartbeatTimeout: 15000,
+                    },
+                },
+            }),
         env.minify &&
             terser({
                 output: {
