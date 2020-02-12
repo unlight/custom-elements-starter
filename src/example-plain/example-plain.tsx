@@ -1,3 +1,4 @@
+/** @jsx h */
 import { h } from 'h-document-element';
 
 // @ts-ignore
@@ -47,7 +48,7 @@ export class ExamplePlainElement extends HTMLElement {
                 composed: true,
             }),
         );
-        this.shadow.append(<span>test</span>);
+        this.shadowRoot.append((<span>test</span>) as any);
     }
 
     /**

@@ -19,6 +19,7 @@ module.exports = {
         ],
     ],
     plugins: [
+        ['@babel/plugin-transform-react-jsx', {}],
         ['babel-plugin-postcss', { test: /\.css$/, tagged: undefined }],
         [
             'babel-plugin-inline-import',

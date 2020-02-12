@@ -69,7 +69,7 @@ function rollupConfig(env) {
         plugins.unshift(
             esmImportToUrl({
                 imports: {
-                    tslib: 'http://localhost:8044/node_modules/tslib/tslib.es6.js',
+                    // tslib: 'http://localhost:8044/node_modules/tslib/tslib.es6.js',
                     'lit-element': 'http://localhost:8044/lit-element.js',
                 },
             }),
