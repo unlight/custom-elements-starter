@@ -51,8 +51,9 @@ function rollupConfig(env) {
             html({
                 title: 'lit-element-starter',
             }),
-        env.watch && !env.test && browsersync({ server: ['dist', '.'], port: 8044, notify: false }),
-        // env.watch && !env.test && livereload(),
+        env.watch &&
+            !env.test &&
+            browsersync({ server: ['dist', '.'], port: 8044, notify: false, open: false }),
         env.minify &&
             terser({
                 output: {
