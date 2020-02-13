@@ -18,9 +18,7 @@
     "predev": "sh Taskfile predev",
     "serve": "npm run dev",
     "test:r": "node node_modules/karma/bin/karma start --single-run",
-    "test:watch": "karma start",
-    "buildtest:w": "npm run build -- --environment TEST --watch",
-    "test:w": "run-p \"buildtest:w\" \"test:watch\"",
+    "test:w": "karma start",
     "test": "npm run eslint && npm run tscheck && npm run test:cov && npm run typecov",
     "test:cov": "npm run test:r -- --collectCoverage",
     "typecov": "node node_modules/type-coverage/bin/type-coverage --detail",
@@ -55,10 +53,7 @@
     }
   },
   "dependencies": {},
-  "peerDependencies": {
-    "lit-element": "^2.2.1",
-    "tslib": "^1.10.0"
-  },
+  "peerDependencies": {},
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-decorators": "^7.8.3",
@@ -98,6 +93,7 @@
     "eslint-plugin-sonarjs": "^0.5.0",
     "eslint-plugin-unicorn": "^16.1.0",
     "eslint-plugin-wix-editor": "^3.0.0",
+    "functional-element": "0.0.14",
     "git-branch-is": "^3.1.0",
     "h-document-element": "^2.0.0",
     "husky": "^4.2.1",
@@ -122,6 +118,7 @@
     "rollup-plugin-typescript-paths": "^1.2.1",
     "semantic-release": "^17.0.2",
     "simplytyped": "^3.2.3",
+    "tslib": "^1.10.0",
     "tslint": "^6.0.0",
     "tslint-clean-code": "^0.2.10",
     "tslint-consistent-codestyle": "^1.16.0",
