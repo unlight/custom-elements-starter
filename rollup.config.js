@@ -1,3 +1,5 @@
+const path = require('path');
+const fs = require('fs');
 const commonjs = require('@rollup/plugin-commonjs');
 const resolve = require('@rollup/plugin-node-resolve');
 const livereload = require('rollup-plugin-livereload');
@@ -18,6 +20,16 @@ const env = {
     test: Boolean(process.env.TEST),
     libs: Boolean(process.env.LIBS),
 };
+
+// const browsersyncServer = (() => {
+//     const input = process.argv[process.argv.indexOf('--input') + 1];
+//     if (input.startsWith('src/')) {
+//         const dir = path.dirname(input);
+//         if (fs.existsSync(dir)) {
+//             return dir;
+//         }
+//     }
+// })();
 
 const extensions = ['.js', '.jsx', '.ts', '.tsx', '.mjs'];
 
