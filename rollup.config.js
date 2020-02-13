@@ -45,7 +45,6 @@ function rollupConfig(env) {
         }),
         babel({
             extensions: extensions,
-            exclude: /node_modules/,
         }),
         !env.test &&
             html({
