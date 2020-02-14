@@ -5,17 +5,10 @@ const styles = document.createElement('style');
 styles.textContent = style;
 
 const templateSlotDefault = document.createElement('template');
-templateSlotDefault.innerHTML = `
-    <div class="root">
-    <slot></slot>
-</div>
-`;
+templateSlotDefault.innerHTML = require('./box-controls.html');
 
 const templateSlotControls = document.createElement('template');
-templateSlotControls.innerHTML = `
-    <div class="slot-controls">
-        <slot name="controls"></slot>
-    </div>`;
+templateSlotControls.innerHTML = require('./slot-controls.html');
 
 class BoxControlsElement extends HTMLElement {
     /**
