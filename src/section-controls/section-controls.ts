@@ -1,4 +1,4 @@
-import { html, customElement } from 'functional-element';
+import { customElement, html } from 'functional-element';
 
 customElement('section-controls', ({ constructing }) => {
     if (constructing) {

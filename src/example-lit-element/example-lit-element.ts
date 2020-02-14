@@ -2,7 +2,8 @@
  * Import LitElement base class, html helper function,
  * and TypeScript decorators
  **/
-import { css, customElement, html, LitElement, property } from 'lit-element';
+import { customElement, html, LitElement, property } from 'lit-element';
+
 // @ts-ignore
 import style from './example-lit-element.css';
 

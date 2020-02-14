@@ -18,6 +18,7 @@
 
 ## Todo
 
+-   webpack parse entry param
 -   fix null chunk
 -   https://github.com/43081j/eslint-plugin-wc
 -   postcss
