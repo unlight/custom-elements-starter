@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+var flatten = require('flat');
 const sourcePath = path.join(__dirname, 'src');
 const buildPath = path.join(__dirname, 'dist');
 
@@ -31,7 +32,7 @@ const defaultOptions = {
 
 module.exports = (options = {}, args = {}) => {
     options = { ...defaultOptions, ...options, ...args };
-    for (const [key, value] of Object.entries(options)) {
+    for (const [key, value] of Object.entries(flatten(options))) {
         process.stdout.write(`${key}:${value} `);
     }
     const stats = {
