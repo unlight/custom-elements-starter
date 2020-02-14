@@ -18,6 +18,7 @@
 
 ## Todo
 
+-   fix null chunk
 -   https://github.com/43081j/eslint-plugin-wc
 -   postcss
 -   https://github.com/oblador/loki
