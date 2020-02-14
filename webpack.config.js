@@ -34,6 +34,26 @@ module.exports = (options = {}, args = {}) => {
     for (const [key, value] of Object.entries(defaultOptions)) {
         process.stdout.write(`${key}:${value} `);
     }
+    const stats = {
+        version: false,
+        maxModules: 0,
+        children: false,
+        warningsFilter: [
+            /export .* was not found in/,
+            /System.import/,
+            /Cannot find SourceMap/,
+            /Cannot find source file/,
+        ],
+    };
+    if (options.test) {
+        Object.assign(stats, {
+            timings: false,
+            hash: false,
+            // builtAt: false,
+            assets: false,
+            entrypoints: false,
+        });
+    }
     let config = {
         context: __dirname,
         entry: options.entry,
@@ -55,8 +75,9 @@ module.exports = (options = {}, args = {}) => {
             contentBase: [buildPath],
             overlay: false,
             disableHostCheck: true,
+            stats: stats,
         },
-
+        stats: stats,
         module: {
             rules: [
                 { parser: { amd: false } },
@@ -69,10 +90,7 @@ module.exports = (options = {}, args = {}) => {
                 {
                     test: (() => {
                         const testTranspileModule = (() => {
-                            const transpileModules = [
-                                'pupa',
-                                ['1-liners', 'module'].join(path.sep),
-                            ];
+                            const transpileModules = [['1-liners', 'module'].join(path.sep)];
                             return file =>
                                 Boolean(transpileModules.find(name => name.includes(file)));
                         })();
@@ -82,7 +100,6 @@ module.exports = (options = {}, args = {}) => {
                             return testTranspileModule(file);
                         };
                     })(),
-                    exclude: /node_modules/,
                     use: {
                         loader: 'ts-loader',
                         options: {

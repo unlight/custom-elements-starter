@@ -1,13 +1,13 @@
-import './section-controls';
+import './box-controls';
 
-describe('section-controls', () => {
+fdescribe('box-controls', () => {
     let element: HTMLElement;
 
     beforeEach(() => {
         if (element) {
             element.remove();
         }
-        element = document.createElement('section-controls');
+        element = document.createElement('box-controls');
         element.innerHTML = `<slot>
             <div>some box</div>
             </slot>
@@ -17,5 +17,6 @@ describe('section-controls', () => {
 
     it('smoke', () => {
         document.body.append(element);
+        expect(element.textContent).toContain('some box');
     });
 });

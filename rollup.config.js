@@ -60,7 +60,7 @@ function rollupConfig(env) {
         }),
         !env.test &&
             html({
-                title: 'lit-element-starter',
+                title: 'custom-elements-starter',
             }),
         env.watch &&
             !env.test &&

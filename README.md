@@ -1,4 +1,4 @@
-# lit-element-starter
+# custom-elements-starter
 
 ## Stack
 

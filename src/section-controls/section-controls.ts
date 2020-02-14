@@ -1,7 +1,6 @@
 import { html, customElement } from 'functional-element';
 
 customElement('section-controls', ({ constructing }) => {
-    debugger;
     if (constructing) {
         return {};
     }

@@ -1,5 +1,5 @@
 {
-  "name": "lit-element-starter",
+  "name": "custom-elements-starter",
   "version": "0.0.0-dev",
   "description": "",
   "main": "index.js",
@@ -15,8 +15,6 @@
     "build:libs:prod": "npm run build -- --environment LIBS,MINIFY,PRODUCTION",
     "build:prod": "npm run build -- --environment MINIFY,PRODUCTION",
     "dev": "npm run build -- --watch",
-    "devw": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
-    "deve": "npm run devw -- --entry ./src/box-controls/box-controls.tsx",
     "#predev": "sh Taskfile predev",
     "serve": "npm run dev",
     "test:r": "node node_modules/karma/bin/karma start --single-run",
@@ -45,7 +43,9 @@
     "storybook": "start-storybook -p 6006",
     "storybook:docs": "start-storybook --docs -p 6006",
     "build:storybook": "build-storybook",
-    "analyze": "wca analyze \"src/**/*.{js,ts}\" --format json --outFile dist/custom-elements.json"
+    "analyze": "wca analyze \"src/**/*.{js,ts}\" --format json --outFile dist/custom-elements.json",
+    "w": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
+    "w:entry": "npm run w -- --entry ./src/box-controls/box-controls.tsx"
   },
   "husky": {
     "hooks": {
@@ -112,6 +112,7 @@
     "karma-mocha-reporter": "^2.2.5",
     "karma-rollup-preprocessor": "^7.0.3",
     "karma-source-map-support": "^1.4.0",
+    "karma-webpack": "^4.0.2",
     "lit-element": "^2.2.1",
     "npm-run-all": "^4.1.5",
     "precise-commits": "^1.0.2",
