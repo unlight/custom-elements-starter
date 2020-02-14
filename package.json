@@ -35,7 +35,7 @@
     "storybook": "start-storybook -p 6006",
     "storybook:docs": "start-storybook --docs -p 6006",
     "build:storybook": "build-storybook",
-    "analyze": "wca analyze \"src/**/*.{js,ts}\" --format json --outFile dist/custom-elements.json"
+    "analyze": "wca analyze \"src/**/*.{js,ts,tsx}\" --format json --outFile dist/custom-elements.json"
   },
   "husky": {
     "hooks": {

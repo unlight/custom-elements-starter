@@ -56,6 +56,7 @@ module.exports = (options = {}, args = {}) => {
         });
     }
     let config = {
+        // externals: ['lit-element'],
         context: __dirname,
         entry: options.entry,
         output: {
@@ -156,8 +157,8 @@ module.exports = (options = {}, args = {}) => {
         ].filter(Boolean),
 
         optimization: {
-            namedModules: options.dev || options.debug ? true : false,
-            namedChunks: options.dev || options.debug ? true : false,
+            // namedModules: options.dev || options.debug ? true : false,
+            // namedChunks: options.dev || options.debug ? true : false,
             minimizer: [
                 (options.minimize
                     ? () => {
