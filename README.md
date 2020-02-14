@@ -3,7 +3,6 @@
 ## Stack
 
 -   TypeScript
--   lit-element
 -   Babel
 -   ESLint
 -   Karma

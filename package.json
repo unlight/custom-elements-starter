@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "keywords": [
-    "lit-element",
-    "typescript",
-    "rollup"
+    "typescript"
   ],
   "scripts": {
     "clean": "rm -rf dist && mkdir dist",
