@@ -46,16 +46,16 @@ class BoxControlsElement extends HTMLElement {
      * have been fully parsed
      */
     connectedCallback() {
-        this.shadow.addEventListener('mouseover', this);
-        this.shadow.addEventListener('mouseout', this);
+        this.addEventListener('mouseenter', this);
+        this.addEventListener('mouseleave', this);
     }
 
     /**
      * Invoked each time the custom element is disconnected from the document's DOM.
      */
     disconnectedCallback() {
-        this.shadow.removeEventListener('mouseover', this);
-        this.shadow.removeEventListener('mouseout', this);
+        this.removeEventListener('mouseenter', this);
+        this.removeEventListener('mouseleave', this);
     }
 
     /**
@@ -68,12 +68,12 @@ class BoxControlsElement extends HTMLElement {
         this[`${event.type}Callback`](event);
     }
 
-    mouseoverCallback(event: MouseEvent) {
+    mouseenterCallback(event: MouseEvent) {
         this.classList.add('hovered');
         this.root.append(templateSlotControls.content.cloneNode(true));
     }
 
-    mouseoutCallback(event: MouseEvent) {
+    mouseleaveCallback(event: MouseEvent) {
         this.classList.remove('hovered');
         this.root.querySelector('.slot-controls')?.remove();
     }
