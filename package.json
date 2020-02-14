@@ -11,7 +11,7 @@
   "scripts": {
     "clean": "rm -rf dist && mkdir dist",
     "dev": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
-    "#dev:entry": "npm run w -- --entry ./src/box-controls/box-controls.tsx",
+    "#dev:entry": "npm run dev -- --entry ./src/box-controls/box-controls.tsx",
     "#build:prod": "webpack --mode production --entry ./src/box-controls/box-controls.tsx",
     "#predev": "sh Taskfile predev",
     "serve": "npm run dev",

@@ -31,7 +31,7 @@ const defaultOptions = {
 
 module.exports = (options = {}, args = {}) => {
     options = { ...defaultOptions, ...options, ...args };
-    for (const [key, value] of Object.entries(defaultOptions)) {
+    for (const [key, value] of Object.entries(options)) {
         process.stdout.write(`${key}:${value} `);
     }
     const stats = {
@@ -90,13 +90,16 @@ module.exports = (options = {}, args = {}) => {
                 {
                     test: (() => {
                         const testTranspileModule = (() => {
-                            const transpileModules = [['1-liners', 'module'].join(path.sep)];
+                            const transpileModules = ['1-liners/module'].map(x =>
+                                x.replace('/', path.sep),
+                            );
                             return file =>
                                 Boolean(transpileModules.find(name => name.includes(file)));
                         })();
                         return function testTranspileTypeScript(file) {
-                            if (file.slice(-4) === '.tsx') return true;
-                            if (file.slice(-3) === '.ts') return true;
+                            if (file.slice(-4) === '.tsx' || file.slice(-3) === '.ts') {
+                                return true;
+                            }
                             return testTranspileModule(file);
                         };
                     })(),

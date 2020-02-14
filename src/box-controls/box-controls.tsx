@@ -6,7 +6,7 @@ styles.textContent = style;
 
 const templateSlotDefault = document.createElement('template');
 templateSlotDefault.innerHTML = `
-<div class="root">
+    <div class="root">
     <slot></slot>
 </div>
 `;
