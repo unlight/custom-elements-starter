@@ -101,14 +101,8 @@ module.exports = (options = {}, args = {}) => {
                         };
                     })(),
                     use: {
-                        loader: 'ts-loader',
-                        options: {
-                            transpileOnly: true,
-                            compilerOptions: {
-                                declaration: false,
-                                declarationMap: false,
-                            },
-                        },
+                        loader: 'babel-loader',
+                        options: {},
                     },
                 },
                 {
