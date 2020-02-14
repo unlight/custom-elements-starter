@@ -149,7 +149,6 @@ module.exports = (options = {}, args = {}) => {
                     template: entryTemplate,
                     filename: 'index.html',
                     inject: true,
-                    // chunks: ['app'],
                     config: { ...options },
                 };
                 if (!settings.template) {

@@ -1,3 +1,23 @@
-::slotted(:hover) {
+:host {
+    display: inline-block;
+}
+
+:host(.hovered) {
     background-color: #ffffed;
 }
+
+.root {
+    position: relative;
+}
+
+.slot-controls {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/*
+::slotted(.hovered) {
+    background-color: #ffffed;
+}
+*/
