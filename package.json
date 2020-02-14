@@ -45,7 +45,8 @@
     "build:storybook": "build-storybook",
     "analyze": "wca analyze \"src/**/*.{js,ts}\" --format json --outFile dist/custom-elements.json",
     "w": "node node_modules/webpack-dev-server/bin/webpack-dev-server",
-    "w:entry": "npm run w -- --entry ./src/box-controls/box-controls.tsx"
+    "w:entry": "npm run w -- --entry ./src/box-controls/box-controls.tsx",
+    "w:prod": "webpack --mode production --entry ./src/box-controls/box-controls.tsx"
   },
   "husky": {
     "hooks": {
