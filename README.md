@@ -4,7 +4,6 @@
 
 -   TypeScript
 -   lit-element
--   Rollup
 -   Babel
 -   ESLint
 -   Karma
@@ -21,9 +20,6 @@
 ## Todo
 
 -   https://github.com/43081j/eslint-plugin-wc
--   import from index.html (start develop specific element) https://github.com/leogr/rollup-plugin-html-entry
 -   postcss
 -   https://github.com/oblador/loki
--   move lit-element-rollup-plugin to app_modules
--   https://www.npmjs.com/package/rollup-plugin-lit-html
 -   mutation
