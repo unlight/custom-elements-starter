@@ -2,4 +2,4 @@
 
 ## Demo
 
-![]()
+![](./checkbox-list.element.gif?raw=true)
