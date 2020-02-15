@@ -4,8 +4,9 @@ const flatten = require('flat');
 const sourcePath = path.join(__dirname, 'src');
 const buildPath = path.join(__dirname, 'dist');
 
-module.exports = (options = {}, args = {}) => {
+module.exports = (env = {}, args = {}) => {
     const defaultOptions = {
+        watch: false,
         libs: false,
         style: false,
         test: false,
@@ -13,14 +14,15 @@ module.exports = (options = {}, args = {}) => {
         debug: false,
         mode: 'development',
     };
-    options = { ...defaultOptions, ...options, ...args };
-    options = {
-        ...options,
+    const options = {
+        ...defaultOptions,
+        ...args,
+        ...env,
         get production() {
             return this.mode === 'production';
         },
         get minimize() {
-            return this.production;
+            return typeof args.minimize === 'boolean' ? args.minimize : this.production;
         },
         get devtool() {
             if (options.test) return 'inline-source-map';
@@ -53,11 +55,22 @@ module.exports = (options = {}, args = {}) => {
         });
     }
     options.entry = (entry => {
+        const glob = require('fast-glob');
         if (entry) {
-            const glob = require('fast-glob');
             [entry] = glob.sync([`src/**/*${entry}*.+(ts|tsx)`, '!**/*.spec.+(ts|tsx)'], {
                 absolute: true,
             });
+            entry = {
+                [path.dirname(path.basename(entry))]: entry,
+            };
+        } else {
+            entry = fs.readdirSync('src').reduce((result, name) => {
+                const [file] = glob.sync([`src/${name}/${name}.+(ts|tsx)`, 'src/${name}/index.*'], {
+                    absolute: true,
+                });
+                result[name] = file;
+                return result;
+            }, {});
         }
         return entry;
     })(options.e || options.entry);
@@ -72,8 +85,8 @@ module.exports = (options = {}, args = {}) => {
         entry: options.entry,
         output: {
             path: buildPath,
-            chunkFilename: `[name]${options.production ? '-[hash:4]' : ''}.js`,
-            filename: `[name]${options.production ? '-[hash:4]' : ''}.js`,
+            // chunkFilename: `[name]${options.production ? '-[hash:4]' : ''}.js`,
+            // filename: `[name]${options.production ? '-[hash:4]' : ''}.js`,
         },
         mode: options.mode,
         devtool: options.devtool,
@@ -143,11 +156,12 @@ module.exports = (options = {}, args = {}) => {
         },
 
         plugins: [
-            (!options.production
+            (options.watch
                 ? () => {
                       const HtmlWebpackPlugin = require('html-webpack-plugin');
                       let entryTemplate = undefined;
-                      if (options.entry && options.entry.includes('src/')) {
+                      const entry = Object.entries()[0];
+                      if (entry && entry.includes('src/')) {
                           const resolve = path.resolve(`${path.dirname(options.entry)}/index.html`);
                           entryTemplate = fs.existsSync(resolve) && resolve;
                       }

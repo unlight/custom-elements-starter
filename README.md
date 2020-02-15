@@ -18,7 +18,6 @@
 
 ## Todo
 
--   set chunk name
 -   postcss
--   https://github.com/oblador/loki
+-   https://github.com/oblador/loki (only react, vue)
 -   mutation

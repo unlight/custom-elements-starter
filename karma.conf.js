@@ -1,7 +1,7 @@
 const webpackConfig = require('./webpack.config');
 
 module.exports = config => {
-    const webpackOptions = { hmr: false, test: true, coverage: false };
+    const webpackOptions = { test: true, coverage: false };
     const files = [{ pattern: 'src/**/*.spec.+(ts|tsx)' }];
 
     config.set({
