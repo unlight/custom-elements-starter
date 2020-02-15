@@ -33,9 +33,10 @@
     "semantic-release": "semantic-release",
     "build": "webpack",
     "storybook": "start-storybook -p 6006",
+    "prestorybook": "npm run custom-elements",
     "storybook:docs": "start-storybook --docs -p 6006",
     "build:storybook": "build-storybook",
-    "analyze": "wca analyze \"src/**/*.{js,ts,tsx}\" --format json --outFile dist/custom-elements.json"
+    "custom-elements": "wca analyze \"src/**/*.{js,ts,tsx}\" --format json --outFile dist/custom-elements.json"
   },
   "husky": {
     "hooks": {
