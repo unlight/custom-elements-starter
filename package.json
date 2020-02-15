@@ -37,7 +37,8 @@
     "prestorybook": "npm run custom-elements",
     "storybook:docs": "start-storybook --docs -p 6006",
     "build:storybook": "build-storybook",
-    "custom-elements": "wca analyze \"src/**/*.{js,ts,tsx}\" --format json --outFile dist/custom-elements.json"
+    "custom-elements": "wca analyze \"src/**/*.{js,ts,tsx}\" --format json --outFile dist/custom-elements.json",
+    "test:m": "node node_modules/stryker-cli/bin/stryker-cli run"
   },
   "husky": {
     "hooks": {
@@ -61,6 +62,12 @@
     "@storybook/addon-docs": "^5.3.13",
     "@storybook/addon-knobs": "^5.3.13",
     "@storybook/web-components": "^5.3.13",
+    "@stryker-mutator/babel-transpiler": "^2.5.0",
+    "@stryker-mutator/core": "^2.5.0",
+    "@stryker-mutator/html-reporter": "^2.5.0",
+    "@stryker-mutator/jasmine-framework": "^2.5.0",
+    "@stryker-mutator/karma-runner": "^2.5.0",
+    "@stryker-mutator/typescript": "^2.5.0",
     "@types/jasmine": "^3.5.4",
     "@types/node": "^13.7.1",
     "@types/webpack": "^4.41.6",
@@ -108,6 +115,7 @@
     "semantic-release": "^17.0.3",
     "simplytyped": "^3.2.3",
     "source-map-loader": "^0.2.4",
+    "stryker-cli": "^1.0.0",
     "terser-webpack-plugin": "^2.3.5",
     "tslib": "^1.10.0",
     "tslint": "^6.0.0",

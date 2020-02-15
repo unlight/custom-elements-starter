@@ -18,5 +18,4 @@
 
 ## Todo
 
--   https://github.com/oblador/loki (only react, vue)
--   mutation
+-   https://github.com/oblador/loki (hold: only react, vue)
