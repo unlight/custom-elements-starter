@@ -7,8 +7,8 @@
                 const output = document.querySelector('#output');
                 const checkboxList = document.querySelector('checkbox-list');
                 checkboxList.options = [
-                    { label: 'Option A', value: '1' },
-                    { label: 'Option B', value: '2' },
+                    { label: 'Germany', value: 'de' },
+                    { label: 'France', value: 'fr' },
                 ];
 
                 const onChange = event => {
@@ -29,14 +29,20 @@
         </script>
     </head>
     <body>
-        <div>checkbox-list element</div>
-        <checkbox-list></checkbox-list>
-        Value:<br />
-        <div id="output" style="white-space: pre;"></div>
-        Add Option:<br />
-        Label: <input name="label" id="addOptionLabel" /> <br />
-        Value:
-        <input name="value" id="addOptionValue" />
-        <button id="addOption">Add</button>
+        <pre>
+<b>HTML</b>: &lt;checkbox-list>&lt;/checkbox-list>
+<b>JavaScript</b>:
+const checkboxList = document.querySelector('checkbox-list');
+checkboxList.options = [
+    { label: 'Germany', value: 'de' },
+    { label: 'France', value: 'fr' },
+];
+<b>Result</b>:
+<checkbox-list></checkbox-list>
+<b>checkboxList.value</b>: <div id="output" style="white-space: pre;"></div>
+Add Option:
+Label: <input size="5" name="label" id="addOptionLabel" />
+Value: <input size="5" name="value" id="addOptionValue" /> <button id="addOption">Add</button>
+        </pre>
     </body>
 </html>
