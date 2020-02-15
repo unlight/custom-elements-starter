@@ -11,13 +11,14 @@ module.exports = {
         'plugin:promise/recommended',
         'plugin:sonarjs/recommended',
         'plugin:lit/recommended',
+        'plugin:wc/recommended',
     ],
     parser: '@typescript-eslint/parser',
     parserOptions: {
-        ecmaVersion: 2019,
+        ecmaVersion: 2020,
         sourceType: 'module',
         ecmaFeatures: {
-            jsx: false,
+            jsx: true,
         },
         project: 'tsconfig.json',
     },
@@ -31,6 +32,7 @@ module.exports = {
         'promise',
         'sonarjs',
         'lit',
+        'wc',
         'only-warn',
     ],
     rules: {
@@ -89,7 +91,12 @@ module.exports = {
     },
     overrides: [
         {
-            files: ['*.spec.ts', '**/testing/**/*.ts', '*.stories.ts', '*.story.ts'],
+            files: [
+                '*.spec.+(ts|tsx)',
+                '**/testing/**/*.+(ts|tsx)',
+                '*.stories.+(ts|tsx)',
+                '*.story.+(ts|tsx)',
+            ],
             rules: {
                 'consistent-return': 0,
                 'max-lines': 0,

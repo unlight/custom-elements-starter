@@ -2,7 +2,6 @@
   "name": "custom-elements-starter",
   "version": "0.0.0-dev",
   "description": "",
-  "main": "index.js",
   "keywords": [
     "typescript"
   ],
@@ -23,7 +22,7 @@
     "tsclint": "tsc --noEmit --strict --forceConsistentCasingInFileNames --noImplicitReturns --noImplicitThis --noUnusedLocals --noUnusedParameters",
     "tsclint:w": "npm run tsclint -- --watch",
     "eslint:w": "watchexec -w src \"npm run eslint -- --cache\"",
-    "eslint": "node node_modules/eslint/bin/eslint src --ext ts",
+    "eslint": "node node_modules/eslint/bin/eslint src --ext ts,tsx",
     "eslint:fix": "npm run eslint -- --fix",
     "tslint:fix": "node node_modules/tslint/bin/tslint -p tsconfig.json --fix",
     "lint:w": "run-p tsclint:w eslint:w",
@@ -80,6 +79,7 @@
     "eslint-plugin-simple-import-sort": "^5.0.1",
     "eslint-plugin-sonarjs": "^0.5.0",
     "eslint-plugin-unicorn": "^16.1.1",
+    "eslint-plugin-wc": "^1.2.0",
     "eslint-plugin-wix-editor": "^3.0.0",
     "flat": "^5.0.0",
     "functional-element": "0.0.14",

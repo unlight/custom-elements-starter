@@ -50,7 +50,6 @@ module.exports = (options = {}, args = {}) => {
         Object.assign(stats, {
             timings: false,
             hash: false,
-            // builtAt: false,
             assets: false,
             entrypoints: false,
         });

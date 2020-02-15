@@ -30,7 +30,7 @@ class BoxControlsElement extends HTMLElement {
         this.attachShadow({ mode: 'open' });
         this.shadow.appendChild(styles.cloneNode(true));
         this.shadow.appendChild(templateSlotDefault.content.cloneNode(true));
-        this.root = this.shadow.querySelector('.root');
+        this.root = this.shadow.querySelector('.root') as HTMLElement;
     }
 
     /**
