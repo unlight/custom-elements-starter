@@ -2,10 +2,13 @@
  * Import LitElement base class, html helper function,
  * and TypeScript decorators
  **/
-import { customElement, html, LitElement, property } from 'lit-element';
+import { css, customElement, html, LitElement, property } from 'lit-element';
 
-// @ts-ignore
-import style from './example-lit-element.css';
+const style = css`
+    :host {
+        font-weight: bold;
+    }
+`;
 
 /**
  * Use the customElement decorator to define your class as

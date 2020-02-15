@@ -23,6 +23,8 @@ module.exports = (options = {}, args = {}) => {
             return this.production;
         },
         get devtool() {
+            if (options.test) return 'inline-source-map';
+            if (options.production) return 'source-map';
             return 'webpack_devtool' in process.env
                 ? process.env.webpack_devtool
                 : 'cheap-source-map';
@@ -74,11 +76,7 @@ module.exports = (options = {}, args = {}) => {
             filename: `[name]${options.production ? '-[hash:4]' : ''}.js`,
         },
         mode: options.mode,
-        devtool: (() => {
-            if (options.test) return 'inline-source-map';
-            if (options.production) return 'source-map';
-            return options.devtool;
-        })(),
+        devtool: options.devtool,
         resolve: {
             extensions: ['.ts', '.tsx', '.js', '.json'],
         },

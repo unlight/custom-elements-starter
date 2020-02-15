@@ -46,7 +46,6 @@ export class ExamplePlainElement extends HTMLElement {
                 composed: true,
             }),
         );
-        this.shadowRoot.append((<span>test</span>) as any);
     }
 
     /**

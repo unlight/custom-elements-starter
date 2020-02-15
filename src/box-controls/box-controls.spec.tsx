@@ -1,6 +1,6 @@
 import './box-controls';
 
-fdescribe('box-controls', () => {
+describe('box-controls', () => {
     let element: HTMLElement;
 
     beforeEach(() => {
