@@ -5,6 +5,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "strict": true,
+    "jsx": "react",
     "noImplicitAny": false,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": false,
