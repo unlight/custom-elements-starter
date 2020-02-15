@@ -18,6 +18,5 @@
 
 ## Todo
 
--   postcss
 -   https://github.com/oblador/loki (only react, vue)
 -   mutation

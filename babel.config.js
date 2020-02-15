@@ -22,7 +22,7 @@ module.exports = api => {
         ],
         plugins: [
             ['@babel/plugin-transform-react-jsx', {}],
-            ['babel-plugin-postcss', { test: /\.css$/, tagged: undefined }],
+            ['babel-plugin-postcss', { test: /\.css$/, tagged: undefined, postcss: true }],
             [
                 'babel-plugin-inline-import',
                 {
