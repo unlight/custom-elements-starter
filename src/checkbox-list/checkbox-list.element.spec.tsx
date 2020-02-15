@@ -1,7 +1,6 @@
-import './checkbox-list.element';
 import { CheckboxListElement } from './checkbox-list.element';
 
-fdescribe('CheckboxListElement', () => {
+describe('CheckboxListElement', () => {
     let element: CheckboxListElement;
     let input: HTMLInputElement;
 
@@ -16,7 +15,7 @@ fdescribe('CheckboxListElement', () => {
 
     it('smoke', () => {
         expect(element).toBeTruthy();
-        expect(element instanceof CheckboxListElement).toBeTruthy();
+        expect(element).toBeInstanceOf(CheckboxListElement);
     });
 
     it('render several options', () => {
@@ -26,7 +25,7 @@ fdescribe('CheckboxListElement', () => {
         ];
         const label = element.shadowRoot!.querySelector<HTMLLabelElement>('[for=checkboxes1]')!;
         expect(label).toBeInstanceOf(HTMLLabelElement);
-        expect(label.innerText).toEqual('B');
+        expect(label.textContent).toEqual('B');
     });
 
     it('options', () => {

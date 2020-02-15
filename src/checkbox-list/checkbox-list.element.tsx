@@ -1,5 +1,6 @@
 /** @jsx h */
 import { h } from 'h-document-element';
+
 // @ts-ignore
 import style from './checkbox-list.element.css';
 import { Option } from './option';
@@ -11,7 +12,7 @@ styles.textContent = style;
  *
  */
 export class CheckboxListElement extends HTMLElement {
-    private name = '';
+    private readonly name = '';
     private root: HTMLElement;
 
     private _options: Option[] = [];
@@ -25,19 +26,24 @@ export class CheckboxListElement extends HTMLElement {
         this.root = this.shadow.firstElementChild as HTMLElement;
         this.shadow.append(styles.cloneNode(true));
     }
+
     static get observedAttributes() {
         return ['name'];
     }
+
     get options(): Option[] {
         return this._options;
     }
+
     set options(v: Option[]) {
         this._options = v;
         this.update();
     }
+
     get value(): string[] {
         return [...this._value.values()];
     }
+
     set value(values: string[]) {
         this._value = new Set<string>(values);
         this.update();
@@ -70,7 +76,7 @@ export class CheckboxListElement extends HTMLElement {
     /**
      * Called when one of checkbox value changed.
      */
-    private optionChange = (event: Event) => {
+    private readonly optionChange = (event: Event) => {
         const input = event.target as HTMLInputElement;
         const inputValue = String(input.value);
         if (input.checked) {
@@ -90,7 +96,7 @@ export class CheckboxListElement extends HTMLElement {
     /**
      * Checks if value is selected (checkbox will be mark as checked)
      */
-    private checked = (value: unknown): boolean => {
+    private readonly checked = (value: unknown): boolean => {
         return this._value.has(String(value));
     };
 
