@@ -1,5 +1,4 @@
 /** @jsx h */
-import { h } from 'h-document-element';
 
 // @ts-ignore
 import style from './example-plain.css';
@@ -13,6 +12,12 @@ const templateElement = document.createElement('template');
 templateElement.innerHTML = templateHtml;
 
 export class ExamplePlainElement extends HTMLElement {
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.shadow.append(styles.cloneNode(true));
+        this.shadow.append(templateElement.content.cloneNode(true));
+    }
     /**
      * Return an array containing the names of the attributes you want to observe.
      */
@@ -25,13 +30,6 @@ export class ExamplePlainElement extends HTMLElement {
             throw new Error('shadowRoot is null');
         }
         return this.shadowRoot;
-    }
-
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.shadow.appendChild(styles.cloneNode(true));
-        this.shadow.appendChild(templateElement.content.cloneNode(true) as Node);
     }
 
     /**

@@ -16,21 +16,21 @@ class BoxControlsElement extends HTMLElement {
      */
     static observedAttributes = [];
 
+    private readonly root: HTMLElement;
+
+    constructor() {
+        super();
+        this.attachShadow({ mode: 'open' });
+        this.shadow.append(styles.cloneNode(true));
+        this.shadow.append(templateSlotDefault.content.cloneNode(true));
+        this.root = this.shadow.querySelector('.root') as HTMLElement;
+    }
+
     private get shadow() {
         if (!this.shadowRoot) {
             throw new Error('No shadowRoot');
         }
         return this.shadowRoot;
-    }
-
-    private root: HTMLElement;
-
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-        this.shadow.appendChild(styles.cloneNode(true));
-        this.shadow.appendChild(templateSlotDefault.content.cloneNode(true));
-        this.root = this.shadow.querySelector('.root') as HTMLElement;
     }
 
     /**
