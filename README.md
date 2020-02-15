@@ -18,9 +18,7 @@
 
 ## Todo
 
--   webpack parse entry param
--   fix null chunk
--   https://github.com/43081j/eslint-plugin-wc
+-   set chunk name
 -   postcss
 -   https://github.com/oblador/loki
 -   mutation

@@ -1,40 +1,36 @@
 const path = require('path');
 const fs = require('fs');
-var flatten = require('flat');
+const flatten = require('flat');
 const sourcePath = path.join(__dirname, 'src');
 const buildPath = path.join(__dirname, 'dist');
 
-const defaultOptions = {
-    libs: false,
-    style: false,
-    test: false,
-    coverage: false,
-    prod: false,
-    nomin: false,
-    debug: false,
-    get dev() {
-        return !this.prod;
-    },
-    get minimize() {
-        return !this.nomin;
-    },
-    get devtool() {
-        return 'webpack_devtool' in process.env ? process.env.webpack_devtool : 'cheap-source-map';
-    },
-    get sourceMap() {
-        const devtool = this.devtool;
-        return !devtool || devtool === '0' ? false : true;
-    },
-    get mode() {
-        return this.prod ? 'production' : 'development';
-    },
-};
-
 module.exports = (options = {}, args = {}) => {
+    const defaultOptions = {
+        libs: false,
+        style: false,
+        test: false,
+        coverage: false,
+        debug: false,
+        mode: 'development',
+    };
     options = { ...defaultOptions, ...options, ...args };
-    for (const [key, value] of Object.entries(flatten(options))) {
-        process.stdout.write(`${key}:${value} `);
-    }
+    options = {
+        ...options,
+        get production() {
+            return this.mode === 'production';
+        },
+        get minimize() {
+            return this.production;
+        },
+        get devtool() {
+            return 'webpack_devtool' in process.env
+                ? process.env.webpack_devtool
+                : 'cheap-source-map';
+        },
+        get sourcemap() {
+            return !this.devtool || this.devtool === '0' ? false : true;
+        },
+    };
     const stats = {
         version: false,
         maxModules: 0,
@@ -54,19 +50,33 @@ module.exports = (options = {}, args = {}) => {
             entrypoints: false,
         });
     }
-    let config = {
+    options.entry = (entry => {
+        if (entry) {
+            const glob = require('fast-glob');
+            [entry] = glob.sync([`src/**/*${entry}*.+(ts|tsx)`, '!**/*.spec.+(ts|tsx)'], {
+                absolute: true,
+            });
+        }
+        return entry;
+    })(options.e || options.entry);
+
+    for (const [key, value] of Object.entries(flatten(options))) {
+        process.stdout.write(`${key}:${value} `);
+    }
+
+    return {
         // externals: ['lit-element'],
         context: __dirname,
         entry: options.entry,
         output: {
             path: buildPath,
-            chunkFilename: `[name]${options.prod ? '-[hash:6]' : ''}.js`,
-            filename: `[name]${options.prod ? '-[hash:6]' : ''}.js`,
+            chunkFilename: `[name]${options.production ? '-[hash:4]' : ''}.js`,
+            filename: `[name]${options.production ? '-[hash:4]' : ''}.js`,
         },
         mode: options.mode,
         devtool: (() => {
             if (options.test) return 'inline-source-map';
-            if (options.prod) return 'source-map';
+            if (options.production) return 'source-map';
             return options.devtool;
         })(),
         resolve: {
@@ -82,7 +92,7 @@ module.exports = (options = {}, args = {}) => {
         module: {
             rules: [
                 { parser: { amd: false } },
-                !options.prod && {
+                !options.production && {
                     test: /\.(js|css)$/,
                     exclude: sourcePath,
                     enforce: 'pre',
@@ -118,7 +128,7 @@ module.exports = (options = {}, args = {}) => {
                     use: {
                         loader: 'file-loader',
                         options: {
-                            name: `i/[name]${options.prod ? '-[hash:6]' : ''}.[ext]`,
+                            name: `i/[name]${options.production ? '-[hash:4]' : ''}.[ext]`,
                         },
                     },
                 },
@@ -135,29 +145,29 @@ module.exports = (options = {}, args = {}) => {
         },
 
         plugins: [
-            (() => {
-                const HtmlWebpackPlugin = require('html-webpack-plugin');
-                let entryTemplate = undefined;
-                if (options.entry && options.entry.includes('src/')) {
-                    const resolve = path.resolve(`${path.dirname(options.entry)}/index.html`);
-                    entryTemplate = fs.existsSync(resolve) && resolve;
-                }
-                const settings = {
-                    template: entryTemplate,
-                    filename: 'index.html',
-                    inject: true,
-                    config: { ...options },
-                };
-                if (!settings.template) {
-                    delete settings['template'];
-                }
-                return new HtmlWebpackPlugin(settings);
-            })(),
+            (!options.production
+                ? () => {
+                      const HtmlWebpackPlugin = require('html-webpack-plugin');
+                      let entryTemplate = undefined;
+                      if (options.entry && options.entry.includes('src/')) {
+                          const resolve = path.resolve(`${path.dirname(options.entry)}/index.html`);
+                          entryTemplate = fs.existsSync(resolve) && resolve;
+                      }
+                      const settings = {
+                          template: entryTemplate,
+                          filename: 'index.html',
+                          inject: true,
+                          config: { ...options },
+                      };
+                      if (!settings.template) {
+                          delete settings['template'];
+                      }
+                      return new HtmlWebpackPlugin(settings);
+                  }
+                : () => undefined)(),
         ].filter(Boolean),
 
         optimization: {
-            // namedModules: options.dev || options.debug ? true : false,
-            // namedChunks: options.dev || options.debug ? true : false,
             minimizer: [
                 (options.minimize
                     ? () => {
@@ -174,6 +184,4 @@ module.exports = (options = {}, args = {}) => {
             ].filter(Boolean),
         },
     };
-
-    return config;
 };
