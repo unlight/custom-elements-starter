@@ -25,8 +25,8 @@ module.exports = (env = {}, args = {}) => {
             return typeof args.minimize === 'boolean' ? args.minimize : this.production;
         },
         get devtool() {
-            if (options.test) return 'inline-source-map';
-            if (options.production) return 'source-map';
+            if (this.test) return 'inline-source-map';
+            if (this.production) return 'source-map';
             return 'webpack_devtool' in process.env
                 ? process.env.webpack_devtool
                 : 'cheap-source-map';
@@ -61,7 +61,7 @@ module.exports = (env = {}, args = {}) => {
                 absolute: true,
             });
             entry = {
-                [path.dirname(path.basename(entry))]: entry,
+                [path.basename(path.dirname(entry))]: entry,
             };
         } else {
             entry = fs.readdirSync('src').reduce((result, name) => {
@@ -80,7 +80,9 @@ module.exports = (env = {}, args = {}) => {
     }
 
     return {
-        // externals: ['lit-element'],
+        externals: {
+            // 'lit-element': 'require("lit-element")',
+        },
         context: __dirname,
         entry: options.entry,
         output: {
@@ -132,7 +134,7 @@ module.exports = (env = {}, args = {}) => {
                 },
                 {
                     test: /\.html$/,
-                    use: [{ loader: 'html-loader', options: { minimize: false } }],
+                    use: [{ loader: 'html-loader', options: { minimize: options.minimize } }],
                 },
                 {
                     test: /\.(woff|woff2|eot|ttf|png|jpg|gif|svg)$/,
@@ -160,9 +162,11 @@ module.exports = (env = {}, args = {}) => {
                 ? () => {
                       const HtmlWebpackPlugin = require('html-webpack-plugin');
                       let entryTemplate = undefined;
-                      const entry = Object.entries()[0];
+                      const entry =
+                          Object.keys(options.entry).length === 1 &&
+                          Object.values(options.entry)[0];
                       if (entry && entry.includes('src/')) {
-                          const resolve = path.resolve(`${path.dirname(options.entry)}/index.html`);
+                          const resolve = path.resolve(`${path.dirname(entry)}/index.html`);
                           entryTemplate = fs.existsSync(resolve) && resolve;
                       }
                       const settings = {
