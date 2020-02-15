@@ -29,6 +29,7 @@ module.exports = config => {
         mime: {
             'text/x-typescript': ['ts', 'tsx'],
         },
+        restartOnFileChange: true,
     });
 
     if (process.argv.includes('--code-coverage') || process.argv.includes('--collectCoverage')) {

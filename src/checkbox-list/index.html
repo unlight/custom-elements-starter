@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <script type="text/javascript">
+            document.addEventListener('DOMContentLoaded', () => {
+                const output = document.querySelector('#output');
+                const checkboxList = document.querySelector('checkbox-list');
+                checkboxList.options = [
+                    { label: 'Option A', value: '1' },
+                    { label: 'Option B', value: '2' },
+                ];
+                checkboxList.addEventListener('change', event => {
+                    output.innerText = JSON.stringify(event.detail);
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div>checkbox-list element</div>
+        <checkbox-list></checkbox-list>
+        Value:<br />
+        <div id="output" style="white-space: pre;"></div>
+    </body>
+</html>

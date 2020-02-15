@@ -57,7 +57,8 @@ module.exports = (env = {}, args = {}) => {
     options.entry = (entry => {
         const glob = require('fast-glob');
         if (entry) {
-            [entry] = glob.sync([`src/**/*${entry}*.+(ts|tsx)`, '!**/*.spec.+(ts|tsx)'], {
+            [entry] = glob.sync(`src/**/*${entry}*.+(ts|tsx)`, {
+                ignore: '**/*.+(spec|story|stories).+(ts|tsx)',
                 absolute: true,
             });
             entry = {
@@ -65,9 +66,10 @@ module.exports = (env = {}, args = {}) => {
             };
         } else {
             entry = fs.readdirSync('src').reduce((result, name) => {
-                const [file] = glob.sync([`src/${name}/${name}.+(ts|tsx)`, 'src/${name}/index.*'], {
-                    absolute: true,
-                });
+                const [file] = glob.sync(
+                    [`src/${name}/${name}*.+(ts|tsx)`, 'src/${name}/index.*'],
+                    { ignore: '**/*.+(spec|story|stories).+(ts|tsx)', absolute: true },
+                );
                 result[name] = file;
                 return result;
             }, {});
