@@ -1,10 +1,15 @@
 # custom-elements-starter
 
+## Custom Elements
+
+-   [checkbox-list](./src/checkbox-list)
+
 ## Stack
 
 -   TypeScript
 -   Babel
 -   ESLint
+-   Webpack
 -   Karma
 -   Jasmine
 -   Prettier

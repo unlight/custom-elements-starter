@@ -9,7 +9,10 @@ const styles = document.createElement('style');
 styles.textContent = style;
 
 /**
- *
+ * Checkbox list custom element
+ * ![](./checkbox-list.element.gif?raw=true)
+ * @element checkbox-list
+ * @fires change - Emits custom event when value is changed, event.detail contains new new value - array of strings.
  */
 export class CheckboxListElement extends HTMLElement {
     private readonly name = '';
@@ -35,6 +38,10 @@ export class CheckboxListElement extends HTMLElement {
         return this._options;
     }
 
+    /**
+     * Set available options.
+     * `Option<V = any> = { label: string; value: V; }`
+     */
     set options(v: Option[]) {
         this._options = v;
         this.update();
@@ -44,6 +51,9 @@ export class CheckboxListElement extends HTMLElement {
         return [...this._value.values()];
     }
 
+    /**
+     * Set checkbox-list value
+     */
     set value(values: string[]) {
         this._value = new Set<string>(values);
         this.update();
@@ -69,7 +79,7 @@ export class CheckboxListElement extends HTMLElement {
         }
     }
 
-    handleEvent(event: Event) {
+    private handleEvent(event: Event) {
         this[`${event.type}Callback`](event);
     }
 
@@ -85,7 +95,7 @@ export class CheckboxListElement extends HTMLElement {
             this._value.delete(inputValue);
         }
         this.dispatchEvent(
-            new CustomEvent('change', {
+            new CustomEvent<string[]>('change', {
                 detail: this.value,
                 composed: true,
                 bubbles: true,

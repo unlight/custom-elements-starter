@@ -48,4 +48,15 @@ describe('CheckboxListElement', () => {
         });
         expect(element.value).toEqual(['1', 'b']);
     });
+
+    it('change event', done => {
+        element.options = [{ label: 'L1', value: 'V1' }];
+        element.addEventListener('change', (event: any) => {
+            expect(event.detail).toEqual(['V1']);
+            done();
+        });
+        input = element.shadowRoot!.querySelector<HTMLInputElement>('[id=checkboxes0]')!;
+        input.checked = true;
+        input.dispatchEvent(new Event('change'));
+    });
 });
